@@ -1,0 +1,68 @@
+.card {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    background-color: #e1e8ec;
+    border-radius: 10px;
+    padding-bottom: 7px;
+    color: #4c5175;
+    font-weight: 600;
+}
+
+.card > img {
+    border-radius: 10px 10px 0 0;
+    padding-bottom: 7px;
+}
+
+.card_text {
+    padding: 0 10px;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.heading {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.status_alive, .status_dead, .status_unknown {
+    height: 12px;
+    width: 12px;
+    border-radius: 10px;
+}
+
+.status_alive {
+    background-color: #55cc44;
+}
+
+.status_dead {
+    background-color: #d63d2e;
+}
+
+.status_unknown {
+    background-color: #9e9e9e;
+}
+
+.full_card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    gap: 15px;
+    background-color: #233558;
+    padding: 30px 50px;
+    color: white;
+    border-radius: 20px;
+    border: none;
+    align-self: center;
+}
+
+.full_card:focus {
+    outline: none;
+}
