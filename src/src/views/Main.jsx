@@ -1,26 +1,32 @@
 import React, {useEffect, useState} from 'react'
 import s from './Main.module.css'
+import logo from '../img/logo.png'
 import Pagination from '@mui/material/Pagination'
 import ReactLoading from 'react-loading'
 import { Card } from "../components/Card/Card";
 
 export const Main = () => {
-    const [isLoaded, setIsLoaded] = useState(false);
-    const [items, setItems] = useState({});
+    const [isLoaded, setIsLoaded] = useState(false)
+    const [items, setItems] = useState({})
+    const [page, setPage] = useState(1)
 
-    function getData () {
-        return fetch("https://rickandmortyapi.com/api/character")
+    function getData (url) {
+        return fetch(url)
             .then(res => res.json())
     }
 
     useEffect(() => {
-        getData().then(
+        getData(`https://rickandmortyapi.com/api/character/?page=${page}`).then(
             (result) => {
                 setIsLoaded(true);
                 setItems(result);
             }
         )
-    }, [])
+    }, [page])
+
+    const handleChange = (event, value) => {
+        setPage(value)
+    }
 
     return (
         <>
@@ -28,6 +34,7 @@ export const Main = () => {
                 isLoaded
                     ?
                     <div className={s.container}>
+                        <img src={logo} height={'220px'}/>
                         <div className={s.wrapper}>
                             {
                                 items?.results?.map((character) => {
@@ -35,7 +42,13 @@ export const Main = () => {
                                 })
                             }
                         </div>
-                        <Pagination count={items?.info?.pages} variant='outlined' shape='rounded'/>
+                        <Pagination count={items?.info?.pages}
+                                    variant='outlined'
+                                    shape='rounded'
+                                    hidePrevButton
+                                    hideNextButton
+                                    onChange={handleChange}
+                        />
                     </div>
                     : <ReactLoading type='bubbles' color='#40f286' height={'10%'} width={'10%'}/>
             }
